@@ -1,0 +1,20 @@
+{
+    "name": "mreschke/mrcore4-legacy",
+    "description": "",
+    "authors": [
+        {
+            "name": "Matthew Reschke",
+            "email": "mail@mreschke.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "4.2.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "Mreschke\\Mrcore4Legacy": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}

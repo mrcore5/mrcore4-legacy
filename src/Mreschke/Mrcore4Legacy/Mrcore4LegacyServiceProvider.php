@@ -1,0 +1,39 @@
+<?php namespace Mreschke\Mrcore4Legacy;
+
+use Illuminate\Support\ServiceProvider;
+
+class Mrcore4LegacyServiceProvider extends ServiceProvider {
+
+	/**
+	 * Indicates if loading of the provider is deferred.
+	 *
+	 * @var bool
+	 */
+	protected $defer = true;
+
+	/**
+	 * Register the service provider.
+	 *
+	 * @return void
+	 */
+	public function register()
+	{
+		\Lifecycle::add(__FILE__.' - '.__FUNCTION__, 1);
+
+		// Load our old legacy helpers api
+		// This is for old mrcore4 app compatibility
+		require __DIR__.'/../../legacy/api.php';
+
+	}
+
+	/**
+	 * Get the services provided by the provider.
+	 *
+	 * @return array
+	 */
+	public function provides()
+	{
+		return array();
+	}
+
+}
