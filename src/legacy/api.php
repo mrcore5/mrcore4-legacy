@@ -27,7 +27,11 @@ if ( ! function_exists('API\snippet')) {
 
 	function snippet($name) {
 		#Usage: eval(API::snippet('iam'));
-		return "require_once '".base_path()."/workbench/mreschke/mrcore/src/legacy/$name.php';";
+		$file = base_path()."/vendor/mreschke/mrcore/src/legacy/$name.php";
+		if (!file_exists($file)) {
+			$file = base_path()."/workbench/mreschke/mrcore/src/legacy/$name.php";
+		}
+		return "require_once '$file';";
 	}
 
 	function load($name) {
