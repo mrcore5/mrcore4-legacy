@@ -23,3 +23,14 @@ Requires a `my.legacy` config array like so
         'MYSQL_DB_USER' => 'root',
         'MYSQL_DB_PASS' => 'pass',
     ));
+
+
+Requires a laravel config/dynatron.php with at least
+
+	return [
+        'smtp_server' => 'smtp.example.com',
+		'smtp_port' => 25,
+		'smtp_user' => 'user',
+		'smtp_pass' => 'password',
+		'smtp_from' => 'full@email.com',
+	];
