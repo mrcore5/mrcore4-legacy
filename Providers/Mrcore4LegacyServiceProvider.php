@@ -1,4 +1,4 @@
-<?php namespace Mreschke\Mrcore4Legacy;
+<?php namespace Mreschke\Mrcore4Legacy\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -18,12 +18,9 @@ class Mrcore4LegacyServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		\Lifecycle::add(__FILE__.' - '.__FUNCTION__, 1);
-
 		// Load our old legacy helpers api
 		// This is for old mrcore4 app compatibility
-		require __DIR__.'/../../legacy/api.php';
-
+		require __DIR__.'/../Legacy/api.php';
 	}
 
 	/**

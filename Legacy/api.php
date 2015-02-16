@@ -26,6 +26,7 @@ namespace API;
 if ( ! function_exists('API\snippet')) {
 
 	function snippet($name) {
+		exit('asdf');
 		#Usage: eval(API::snippet('iam'));
 		$file = base_path()."/vendor/mreschke/mrcore4-legacy/src/legacy/$name.php";
 		if (!file_exists($file)) {
