@@ -23,11 +23,11 @@ class helper_email {
 	public $url;
 
 	public function __construct($to=null, $subject=null, $body=null) {
-		$this->smtp_server = \Config::get('dynatron.smtp_server');
-		$this->smtp_port = \Config::get('dynatron.smtp_port');
-		$this->smtp_user = \Config::get('dynatron.smtp_user');
-		$this->smtp_pass = \Config::get('dynatron.smtp_pass');
-		$this->from = \Config::get('dynatron.smtp_from');
+		$this->smtp_server = \Config::get('mail.host');
+		$this->smtp_port = \Config::get('mail.port');
+		$this->smtp_user = \Config::get('mail.username');
+		$this->smtp_pass = \Config::get('mail.password');
+		$this->from = \Config::get('mail.from.address');
 		$this->to = $to;
 		$this->subject = $subject;
 		$this->body = $body;
