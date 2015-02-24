@@ -1,6 +1,6 @@
 <?php namespace Mreschke\Mrcore4Legacy\Providers;
 
-use Illuminate\Support\ServiceProvider;
+use Mrcore\Modules\Foundation\Support\ServiceProvider;
 
 class Mrcore4LegacyServiceProvider extends ServiceProvider {
 
@@ -10,6 +10,16 @@ class Mrcore4LegacyServiceProvider extends ServiceProvider {
 	 * @var bool
 	 */
 	protected $defer = true;
+
+	/**
+	 * Bootstrap the application events.
+	 *
+	 * @return void
+	 */
+	public function boot()
+	{
+		//
+	}
 
 	/**
 	 * Register the service provider.
