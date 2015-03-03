@@ -142,15 +142,17 @@ class helper_mssql {
 	                } elseif ($field->type == 'bit') {
 	                    $data = ($data == 1 ? 'true' : 'false');
 	                }
-	                foreach($this->columns_output as $custcolname => $custcoldata) {
-	                    if (strtolower($custcolname) == strtolower($colname)) {
-	                        $data = $custcoldata;
-	                        foreach ($row as $regexcolname => $regexdata) {
-	                            $data = preg_replace("'%$regexcolname%'", $row[$regexcolname], $data);
-	                        }
-	                        break;
-	                    }
-	                }
+	                if (isset($this->columns_output)) {
+		                foreach($this->columns_output as $custcolname => $custcoldata) {
+		                    if (strtolower($custcolname) == strtolower($colname)) {
+		                        $data = $custcoldata;
+		                        foreach ($row as $regexcolname => $regexdata) {
+		                            $data = preg_replace("'%$regexcolname%'", $row[$regexcolname], $data);
+		                        }
+		                        break;
+		                    }
+		                }
+		            }
 	                $line[] = $data;
 	            }
 	            $f++;
@@ -240,10 +242,12 @@ class helper_mssql {
 						//Only show columns if in list of visible columns
 						if (!in_array(strtolower($field->name), array_map('strtolower', $this->columns))) $show = false;
 					}
-					foreach($this->columns_output as $key=>$value) {
-						if (strtolower($key) == strtolower($field->name)) {
-							$output = preg_replace('"%data%"', $output, $value);
-							break;
+					if (isset($this->columns_output)) {
+						foreach($this->columns_output as $key=>$value) {
+							if (strtolower($key) == strtolower($field->name)) {
+								$output = preg_replace('"%data%"', $output, $value);
+								break;
+							}
 						}
 					}
 					if ($show) echo "<td>$output</td>";

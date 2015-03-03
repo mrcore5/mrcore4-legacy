@@ -1,4 +1,12 @@
-<?php
+<?php namespace API;
+
+use Auth;
+use Config;
+use Layout;
+use Mrcore;
+use Request;
+use Mrcore\Models\User;
+
 /**
  * mRcore API v1 for mRcore 4.0 backwards compatibility
  *
@@ -13,31 +21,28 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
-/* Old legacy usage is
-eval(API\snippet('mssql'));
-eval(API\snippet('form'));
-$sql = new helper_mssql;
-$form = new helper_form;
-...*/
-
-namespace API;
-
 if ( ! function_exists('API\snippet')) {
 
+	/* Old legacy usage is
+	eval(API\snippet('mssql'));
+	eval(API\snippet('form'));
+	$sql = new helper_mssql;
+	$form = new helper_form;
+	...*/
+
+
 	function snippet($name) {
-		exit('asdf');
 		#Usage: eval(API::snippet('iam'));
-		$file = base_path()."/vendor/mreschke/mrcore4-legacy/src/legacy/$name.php";
+		$file = base_path()."/vendor/mreschke/mrcore4-legacy/Legacy/$name.php";
 		if (!file_exists($file)) {
-			$file = base_path()."/workbench/mreschke/mrcore4-legacy/src/legacy/$name.php";
+			$file = base_path()."/../Modules/Mreschke/Mrcore4Legacy/Legacy/$name.php";
 		}
 		return "require_once '$file';";
 	}
 
 	function load($name) {
 		#Usage: eval(API::file('34/.sys/index.php'));
-		return "require_once '".\Config::get('mrcore.files')."/index/$name';";
+		return "require_once '".Config::get('mrcore.files')."/index/$name';";
 	}
 
 	class v1 {
@@ -62,18 +67,18 @@ if ( ! function_exists('API\snippet')) {
 	class v1_User {
 
 		public function __construct() {
-			$this->id = \Auth::user()->id;
-			$this->email = \Auth::user()->email;
-			$this->first = \Auth::user()->first;
-			$this->last = \Auth::user()->last;
-			$this->alias = \Auth::user()->alias;
-			$this->is_admin = \User::isAdmin();
-			$this->is_authenticated = \User::isAuthenticated();
-			$this->perm_create = \User::hasPermission('create');
-			$this->perm_exec = \User::hasPermission('write_script');
-			$this->perm_html = \User::hasPermission('write_html');
-			$this->global_topic = \Auth::user()->global_post_id;
-			$this->user_topic = \Auth::user()->home_post_id;
+			$this->id = Auth::user()->id;
+			$this->email = Auth::user()->email;
+			$this->first = Auth::user()->first;
+			$this->last = Auth::user()->last;
+			$this->alias = Auth::user()->alias;
+			$this->is_admin = Auth::admin();
+			$this->is_authenticated = Auth::check();
+			$this->perm_create = User::hasPermission('create');
+			$this->perm_exec = User::hasPermission('write_script');
+			$this->perm_html = User::hasPermission('write_html');
+			$this->global_topic = Auth::user()->global_post_id;
+			$this->user_topic = Auth::user()->home_post_id;
 		}
 
 	}
@@ -82,14 +87,14 @@ if ( ! function_exists('API\snippet')) {
 	class v1_Config {
 
 		public function __construct() {
-			$this->files_dir = \Config::get('mrcore.files');
-			$this->web_base_url = \Config::get('mrcore.base_url');
-			$this->web_host = \Config::get('mrcore.host');
-			$this->abs_base = \Config::get('mrcore.base');
-			$this->help_topic = \Config::get('mrcore.help');
-			$this->global_topic = \Config::get('mrcore.global');
-			$this->userinfo_topic = \Config::get('mrcore.userinfo');
-			$this->searchbox_topic = \Config::get('mrcore.searchbox');
+			$this->files_dir = Config::get('mrcore.files');
+			$this->web_base_url = Config::get('mrcore.base_url');
+			$this->web_host = Config::get('mrcore.host');
+			$this->abs_base = Config::get('mrcore.base');
+			$this->help_topic = Config::get('mrcore.help');
+			$this->global_topic = Config::get('mrcore.global');
+			$this->userinfo_topic = Config::get('mrcore.userinfo');
+			$this->searchbox_topic = Config::get('mrcore.searchbox');
 
 			#Unusable to mrcore5 so just set any value
 			$this->recent_max_title_len = 0;
@@ -103,11 +108,11 @@ if ( ! function_exists('API\snippet')) {
 	class v1_View {
 
 		function appmode($value = null) {
-			return \Layout::mode($value);
+			return Layout::mode($value);
 		}
 
 		function title($value = null) {
-			return \Layout::title($value);
+			return Layout::title($value);
 		}
 
 		function menu($value) {
@@ -130,23 +135,23 @@ if ( ! function_exists('API\snippet')) {
 		}
 
 		function js($value = null, $append = true) {
-			return \Layout::js($value, $append);
+			return Layout::js($value, $append);
 		}
 
 		function remove_js($value) {
-			return \Layout::removeJs($value);
+			return Layout::removeJs($value);
 		}
 
 		function css($value = null, $append = true) {
-			return \Layout::css($value, $prepend);
+			return Layout::css($value, $prepend);
 		}
 
 		function css_print($value, $append = true) {
-			return \Layout::printCss($value, $prepend);
+			return Layout::printCss($value, $prepend);
 		}
 
 		function remove_css($value) {
-			return \Layout::removeCss($value);
+			return Layout::removeCss($value);
 		}
 
 
@@ -178,7 +183,7 @@ if ( ! function_exists('API\snippet')) {
 
 		function get_url($page='', $is_user_image=false) {
 			#return \Page::get_url($page, $is_user_image);
-			return \Request::url();
+			return Request::url();
 		}
 
 	}
@@ -186,7 +191,7 @@ if ( ! function_exists('API\snippet')) {
 	Class v1_Topic {
 
 		public function __construct() {
-			$post = \Mrcore::post()->getModel();
+			$post = Mrcore::post()->getModel();
 			$this->id = $post->id;
 			$this->post_id = $post->id;
 			$this->post_uuid = $post->uuid;
