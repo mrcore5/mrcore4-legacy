@@ -71,10 +71,12 @@ class helper_mssql {
 			$this->result = mssql_query($this->query) or die(mssql_get_last_message());
 			#if ($this->result == false) {
 			#	echo "<div style='color: red;font-weight: bold'>".mssql_get_last_message()."</div><div style='color:red'>".$this->query."</div>";
-			#} 
-			$this->row_count = mssql_num_rows($this->result);
-			$this->field_count = mssql_num_fields($this->result);
-		
+            #}
+            if (!is_bool($this->result)) {
+    			$this->row_count = mssql_num_rows($this->result);
+    			$this->field_count = mssql_num_fields($this->result);
+            }
+
 		} elseif (isset($this->sp)) {
 			//Execute SQL Procedure
 			$statement = mssql_init($this->sp) or die ("Failed to initialize procedure ".$this->sp);
@@ -86,13 +88,13 @@ class helper_mssql {
 			}
 			$this->row_count = mssql_num_rows($this->result);
 			$this->field_count = mssql_num_fields($this->result);
-		
+
 		} elseif (isset($this->builder->from)) {
 			//Execute a advanced query builder object
 			$common = new helper_common;
 			if ($common->get_url_action() == 'ajax') {
 				if ($_GET['key'] == '8feb8b9265a3878fcb204a591dcb91a5') {
-  				
+
 	  				//Take query builder plus all filters/sorts and
 	  				//get an object that has everything, query + total records query
 	  				$this->builder->expand();
@@ -189,7 +191,7 @@ class helper_mssql {
 		$ret = $default;
 		if (isset($value)) $ret = $value;
 		if ($auto_inclose_quotes && !is_numeric($ret) && strtolower($ret) != 'null') {
-			$ret = "'".$ret."'";	
+			$ret = "'".$ret."'";
 		}
 		return $ret;
 	}
@@ -203,7 +205,7 @@ class helper_mssql {
 	}
 
 	public function output_table() {
-		mssql_data_seek($this->result, 0);
+		if ($this->row_count > 0) mssql_data_seek($this->result, 0);
 		if ($this->capture_output) {
 			//Capture output as return variable instead of printing to screen
 			ob_start();
@@ -224,7 +226,7 @@ class helper_mssql {
 			for ($r = 0; $r <= $this->row_count-1; $r++) {
 				$row = mssql_fetch_row($this->result);
 				if ($r % 2) {
-					echo "<tr class='table_tr_even'>";	
+					echo "<tr class='table_tr_even'>";
 				} else {
 					echo "<tr class='table_tr_odd'>";
 				}
@@ -251,7 +253,7 @@ class helper_mssql {
 						}
 					}
 					if ($show) echo "<td>$output</td>";
-					
+
 				}
 				echo "</tr>";
 			}
@@ -270,7 +272,7 @@ class helper_mssql {
 		if (isset($save_path)) {
 			$tmp_dir = $save_path;
 		} else {
-			$tmp_dir = $common->tmp_dir;	
+			$tmp_dir = $common->tmp_dir;
 		}
 		if (!is_dir($tmp_dir)) exec('mkdir -p '.$tmp_dir);
 		$filename = preg_replace("'\.csv'i", '', $filename)."_".date("Y-m-d-H-m-s").".csv";

@@ -41,24 +41,27 @@ class helper_form {
 	}
 
 	public function select($name, $options, $selected=null, $id=null, $attributes=null) {
-		if (is_null($selected)) {
-			if (isset($_POST[preg_replace('"\[|\]"', '', $name)])) {
-				$selected = $_POST[preg_replace('"\[|\]"', '', $name)];
+		if (isset($options)) {
+			if (is_null($selected)) {
+				if (isset($_POST[preg_replace('"\[|\]"', '', $name)])) {
+					$selected = $_POST[preg_replace('"\[|\]"', '', $name)];
+				}
+			} 
+			if (!$id) $id = $name;
+			$out = "<select name='$name' id='$id' $attributes>";
+			$is_assoc = false;
+			$is_assoc = array_keys($options) !== range(0, count($options) -1);
+			foreach ($options as $key=>$value) {
+				if (!$is_assoc) $key = $value;
+				if ((is_array($selected) && in_array($key, $selected)) || $key == $selected) {
+					$out .= "<option selected='selected' value='$key'>$value</option>";
+				} else {
+					$out .= "<option value='$key'>$value</option>";	
+				}
 			}
-		} 
-		if (!$id) $id = $name;
-		$out = "<select name='$name' id='$id' $attributes>";
-		$is_assoc = array_keys($options) !== range(0, count($options) -1);
-		foreach ($options as $key=>$value) {
-			if (!$is_assoc) $key = $value;
-			if ((is_array($selected) && in_array($key, $selected)) || $key == $selected) {
-				$out .= "<option selected='selected' value='$key'>$value</option>";
-			} else {
-				$out .= "<option value='$key'>$value</option>";	
-			}
+			$out .= "</select>";
+			return $out;
 		}
-		$out .= "</select>";
-		return $out;
 	}
 
 	public function submit($name, $value, $id=null, $attributes=null) {

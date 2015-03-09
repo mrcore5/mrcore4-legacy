@@ -26,13 +26,14 @@ class helper_common {
 	 mReschke 2013-01-24
 	*/
 	public function array_insert($array, $position, $value) {
+		$is_assoc = false;
 		if (isset($array)) {
 			$is_assoc = array_keys($array) !== range(0, count($array) -1);
 		}
 		if ($is_assoc) {
 			$array = array('-1' => $value) + $array;
 		} else {
-			array_splice($array, $position, 0, $value);	
+			if (isset($array)) array_splice($array, $position, 0, $value);	
 		}
 		return $array;
 	}
