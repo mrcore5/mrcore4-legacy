@@ -20,19 +20,19 @@ class helper_form {
 	public function text($name, $value=null, $id=null, $attributes=null) {
 		if (is_null($value) && isset($_POST[$name])) $value = $_POST[$name];
 		if (!$id) $id = $name;
-		return "<input type='text' name='$name' id='$id' value='".htmlentities($value)."' $attributes />";
+		return "<input type='text' name='$name' id='$id' value='".htmlentities($value)."' $attributes class='form-control' />";
 	}
 
 	public function textarea($name, $value=null, $id=null, $attributes=null) {
 		if (is_null($value) && isset($_POST[$name])) $value = $_POST[$name];
 		if (!$id) $id = $name;
-		return "<textarea name='$name' id='$id' $attributes>".htmlentities($value)."</textarea>";
+		return "<textarea name='$name' id='$id' $attributes class='form-control'>".htmlentities($value)."</textarea>";
 	}
 
 	public function password($name, $value=null, $id=null, $attributes=null) {
 		if (is_null($value) && isset($_POST[$name])) $value = $_POST[$name];
 		if (!$id) $id = $name;
-		return "<input type='password' autocomplete='off' name='$name' id='$id' value='".htmlentities($value)."' $attributes />";
+		return "<input type='password' autocomplete='off' name='$name' id='$id' value='".htmlentities($value)."' $attributes class='form-control' />";
 	}
 
 	public function checkbox($name, $value=null, $id=null, $attributes=null) {
@@ -48,7 +48,7 @@ class helper_form {
 				}
 			} 
 			if (!$id) $id = $name;
-			$out = "<select name='$name' id='$id' $attributes>";
+			$out = "<select name='$name' id='$id' $attributes class='form-control'>";
 			$is_assoc = false;
 			$is_assoc = array_keys($options) !== range(0, count($options) -1);
 			foreach ($options as $key=>$value) {
@@ -67,12 +67,12 @@ class helper_form {
 	public function submit($name, $value, $id=null, $attributes=null) {
 		#To use a javascript confirm box use $form->submit('btn_move', 'Move Now!', null, "onclick=\"return confirm('Are you sure?');\"");
 		if (!$id) $id = $name;
-		return "<input type='submit' name='$name' id='$id' value='$value' class='btn btn-xs btn-primary' $attributes />";
+		return "<input type='submit' name='$name' id='$id' value='$value' class='btn btn-primary' $attributes />";
 	}
 
 	public function button($name, $value, $id=null, $attributes=null) {
 		if (!$id) $id = $name;
-		return "<input type='button' name='$name' id='$id' value='$value' class='btn btn-xs btn-primary' $attributes />";
+		return "<input type='button' name='$name' id='$id' value='$value' class='btn btn-primary' $attributes />";
 	}
 
 	public function link($url, $value, $id=null, $attributes=null) {
