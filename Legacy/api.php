@@ -5,7 +5,7 @@ use Config;
 use Layout;
 use Mrcore;
 use Request;
-use Mrcore\Models\User;
+use Mrcore\Modules\Wiki\Models\User;
 
 /**
  * mRcore API v1 for mRcore 4.0 backwards compatibility
@@ -42,7 +42,7 @@ if ( ! function_exists('API\snippet')) {
 
 	function load($name) {
 		#Usage: eval(API::file('34/.sys/index.php'));
-		return "require_once '".Config::get('mrcore.files')."/index/$name';";
+		return "require_once '".Config::get('mrcore.wiki.files')."/index/$name';";
 	}
 
 	class v1 {
@@ -87,14 +87,21 @@ if ( ! function_exists('API\snippet')) {
 	class v1_Config {
 
 		public function __construct() {
-			$this->files_dir = Config::get('mrcore.files');
-			$this->web_base_url = Config::get('mrcore.base_url');
-			$this->web_host = Config::get('mrcore.host');
-			$this->abs_base = Config::get('mrcore.base');
-			$this->help_topic = Config::get('mrcore.help');
-			$this->global_topic = Config::get('mrcore.global');
-			$this->userinfo_topic = Config::get('mrcore.userinfo');
-			$this->searchbox_topic = Config::get('mrcore.searchbox');
+
+			// Get hostname, so if server_name is
+			// mrcore5.lindev.mreschke.com, return just mreschke.net
+			$root = $_SERVER['SERVER_NAME'];
+			$tmp = explode(".", $root);
+			$host = $tmp[count($tmp) -2].'.'.$tmp[count($tmp) -1];
+
+			$this->files_dir = Config::get('mrcore.wiki.files');
+			$this->web_base_url = Config::get('app.url');
+			$this->web_host = $host;
+			$this->abs_base = base_path();
+			$this->help_topic = Config::get('mrcore.wiki.help');
+			$this->global_topic = Config::get('mrcore.wiki.global');
+			$this->userinfo_topic = Config::get('mrcore.wiki.userinfo');
+			$this->searchbox_topic = Config::get('mrcore.wiki.searchbox');
 
 			#Unusable to mrcore5 so just set any value
 			$this->recent_max_title_len = 0;

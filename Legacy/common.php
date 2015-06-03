@@ -17,7 +17,7 @@ class helper_common {
 
 	public function __construct() {
 		$this->tmp_dir = base_path().'/public/tmp/';
-		$this->tmp_url = \Config::get('mrcore.base_url').'/tmp/';
+		$this->tmp_url = \Config::get('app.url').'/tmp/';
 	}
 
 	/*
