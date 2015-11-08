@@ -14,7 +14,8 @@ See https://github.com/mrcore5/framework for details and installation instructio
 
 ## Official Documentation
 
-This package uses your Laravel `config/database.php` file, so there is no special configuration for database.
+This package uses your Laravel `config/database.php` config file and is looking for
+both a `sqlsrv` and `mysql` connection array.
 
 This package uses SMTP mail settings from Laravel, so you will need to define those in your .env like so
 
