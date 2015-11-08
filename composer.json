@@ -3,10 +3,10 @@
 	"type": "library",
 	"description": "Mreschke mRcore4 Legacy Helpers",
 	"keywords": ["mreschke", "mrcore", "legacy"],
-	"homepage": "http://github.com/mreschke/mreschke-mrcore4-legacy",
+	"homepage": "http://github.com/mrcore5/mrcore4-legacy",
 	"license": "MIT",
 	"support": {
-		"issues": "https://github.com/mreschke/mreschke-mrcore4-legacy/issues"
+		"issues": "https://github.com/mrcore5/mrcore4-legacy/issues"
 	},
 	"authors": [
 		{
