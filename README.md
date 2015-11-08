@@ -14,9 +14,17 @@ See https://github.com/mrcore5/framework for details and installation instructio
 
 ## Official Documentation
 
-For this legacy bridge app, well, there isn't any.
+This package uses your Laravel `config/database.php` file, so there is no special configuration for database.
 
-For now, see https://github.com/mrcore5/framework
+This package uses SMTP mail settings from Laravel, so you will need to define those in your .env like so
+
+	### SMTP Required for mrcore4legacy ###
+	MAIL_HOST=smtp.example.com
+	MAIL_PORT=587
+	MAIL_USERNAME=system@example.com
+	MAIL_PASSWORD=password
+	MAIL_FROM_ADDRESS=legacy@exanoke.com
+	MAIL_FROM_NAME=Legacy
 
 ## Contributing
 
