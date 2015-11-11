@@ -1,6 +1,6 @@
 <?php namespace Mreschke\Mrcore4Legacy\Providers;
 
-use Mrcore\Modules\Foundation\Support\ServiceProvider;
+use Illuminate\Support\ServiceProvider;
 
 class Mrcore4LegacyServiceProvider extends ServiceProvider {
 

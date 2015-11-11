@@ -5,7 +5,7 @@ use Config;
 use Layout;
 use Mrcore;
 use Request;
-use Mrcore\Modules\Wiki\Models\User;
+use Mrcore\Wiki\Models\User;
 
 /**
  * mRcore API v1 for mRcore 4.0 backwards compatibility
