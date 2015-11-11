@@ -1,38 +1,36 @@
-#mreschke-mrcore4-legacy
+## Mrcore4 to Mrcore5 Bridge
 
-Mrcore4 Legacy Helpers for mRcore5
+This mrcore5 applications allow all mrcore4 apps to function by providing a legacy interface.
 
+Use this with mrcore5 only if you are in an environment that needs to support mrcore 4 applications.
 
+## What Is Mrcore
 
+Mrcore is a set of Laravel and Lumen components used to build various systems.
+It is a framework, a development platform and a CMS.  It is a modularized version of Laravel
+providing better package development support.  Think of Laravel 4.x workbenches on steroids.
 
+See https://github.com/mrcore5/framework for details and installation instructions.
 
-Installation
-============
+## Official Documentation
 
-Requires a `my.legacy` config array like so
+This package uses your Laravel `config/database.php` config file and is looking for
+both a `sqlsrv` and `mysql` connection array.
 
-    // Configs for the mreschke-mrcore4-legacy package
-    Config::set('my.legacy', array(
-        'MSSQL_DB_NAME' => 'Ebis_Prod',
-        'MSSQL_DB_SERVER' => 'dyna-sql',
-        'MSSQL_DB_PORT' => 1433,
-        'MSSQL_DB_USER' => 'user',
-        'MSSQL_DB_PASS' => 'pass',
+This package uses SMTP mail settings from Laravel, so you will need to define those in your .env like so
 
-        'MYSQL_DB_NAME' => 'mrcore4',
-        'MYSQL_DB_SERVER' => 'localhost',
-        'MYSQL_DB_PORT' => 3306,
-        'MYSQL_DB_USER' => 'root',
-        'MYSQL_DB_PASS' => 'pass',
-    ));
+	### SMTP Required for mrcore4legacy ###
+	MAIL_HOST=smtp.example.com
+	MAIL_PORT=587
+	MAIL_USERNAME=system@example.com
+	MAIL_PASSWORD=password
+	MAIL_FROM_ADDRESS=legacy@exanoke.com
+	MAIL_FROM_NAME=Legacy
 
+## Contributing
 
-Requires a laravel config/dynatron.php with at least
+Thank you for considering contributing to the mRcore framework!  Fork and pull!
 
-	return [
-        'smtp_server' => 'smtp.example.com',
-		'smtp_port' => 25,
-		'smtp_user' => 'user',
-		'smtp_pass' => 'password',
-		'smtp_from' => 'full@email.com',
-	];
+### License
+
+Mrcore is open-sourced software licensed under the [MIT license](http://mreschke.com/license/mit)
