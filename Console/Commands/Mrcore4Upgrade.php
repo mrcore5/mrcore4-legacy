@@ -7,7 +7,7 @@
  * @link       http://mreschke.com
  * @license    http://mreschke.com/topic/317/MITLicense
  * @package    Mreschke\Mrcore
- * @since      2014-02-20 
+ * @since      2014-02-20
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -92,7 +92,7 @@ class Mrcore4Upgrade extends Command {
 			$this->info('  Translating user '.$m4user->email);
 			$user = new \User;
 			$user->id = $m4user->user_id;
-			$user->uuid = \Mreschke\Helpers\String::getGuid();
+			$user->uuid = \Mreschke\Helpers\Str::getGuid();
 			$user->email = $m4user->email;
 			$user->password = \Hash::make($m4user->password);
 			$user->first = $m4user->first_name;
@@ -174,12 +174,12 @@ class Mrcore4Upgrade extends Command {
 			$m4stat = $m4db->table('tbl_topic_stat')->where('topic_id', $m4topic->topic_id)->first();
 
 			$this->info(' Translating post '.$m4post->topic_id.' - '.$m4post->title);
-			
+
 			$post = new \Post;
 			$post->id = $m4post->topic_id;
-			$post->uuid = \Mreschke\Helpers\String::uuidToGuid($m4post->post_uuid);
+			$post->uuid = \Mreschke\Helpers\Str::uuidToGuid($m4post->post_uuid);
 			$post->title = $m4post->title;
-			$post->slug = \Mreschke\Helpers\String::slugify($m4post->title);
+			$post->slug = \Mreschke\Helpers\Str::slugify($m4post->title);
 			$post->content = \Mrcore\Crypt::encrypt($m4post->body);
 			$post->teaser = \Mrcore\Crypt::encrypt($m4topic->teaser);
 			$post->contains_script = $m4post->has_exec;
@@ -194,7 +194,7 @@ class Mrcore4Upgrade extends Command {
 			$post->deleted = $m4post->deleted;
 			$post->password = null;
 			if (isset($m4stat)) {
-				$post->clicks = $m4stat->view_count;	
+				$post->clicks = $m4stat->view_count;
 			} else {
 				$post->clicks = 0;
 			}
@@ -231,7 +231,7 @@ class Mrcore4Upgrade extends Command {
 			$postPermission = new \PostPermission;
 			$postPermission->post_id = $m4permLink->topic_id;
 			// mrcore4 perms are 1,2,3 (read,write,comment) mrcore5 are 7,8,9 (so +6)
-			$postPermission->permission_id = ($m4permLink->perm_id + 6); 
+			$postPermission->permission_id = ($m4permLink->perm_id + 6);
 			$postPermission->role_id = $m4permLink->perm_group_id;
 			$postPermission->save();
 		}
