@@ -44,9 +44,9 @@ class helper_email {
 		if (!$this->body) $this->body = 'Empty Body';
 		if ($this->as_html) {
 			$this->body = preg_replace('"\r\n"', '<br />', $this->body);
-			$args[] = "--html=$this->body";
+			$args[] = "--html='$this->body'";
 		} else {
-			$args[] = "--text=$this->body";
+			$args[] = "--text='$this->body'";
 		}
 
 		$args[] = "--to='$this->to'";
