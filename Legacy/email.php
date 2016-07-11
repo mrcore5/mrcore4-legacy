@@ -23,11 +23,11 @@ class helper_email {
 	public $url;
 
 	public function __construct($to=null, $subject=null, $body=null) {
-		$this->smtp_server = \Config::get('mail.host');
-		$this->smtp_port = \Config::get('mail.port');
-		$this->smtp_user = \Config::get('mail.username');
-		$this->smtp_pass = \Config::get('mail.password');
-		$this->from = \Config::get('mail.from.address');
+		#$this->smtp_server = \Config::get('mail.host');
+		#$this->smtp_port = \Config::get('mail.port');
+		#$this->smtp_user = \Config::get('mail.username');
+		#$this->smtp_pass = \Config::get('mail.password');
+		#$this->from = \Config::get('mail.from.address');
 		$this->to = $to;
 		$this->subject = $subject;
 		$this->body = $body;
@@ -38,7 +38,51 @@ class helper_email {
 		$this->url = new helper_url;
 	}
 
-	public function send() {
+	public function send()
+	{
+		$args = [];
+		if (!$this->body) $this->body = 'Empty Body';
+		if ($this->as_html) {
+			$this->body = preg_replace('"\r\n"', '<br />', $this->body);
+			$args[] = "--html=$this->body";
+		} else {
+			$args[] = "--text=$this->body";
+		}
+
+		$args[] = "--to='$this->to'";
+		$args[] = "--subject='$this->subject'";
+		if (isset($this->from)) $args[] = "--from='$this->from'";
+		if (isset($this->cc)) $args[] = "--cc='$this->cc'";
+		if (isset($this->bcc)) $args[] = "--bcc='$this->bcc'";
+		if (isset($this->files)) {
+			foreach ($this->files as $f) {
+				if (file_exists($f)) {
+					$args[] = "--file='$f'";
+				}
+			}
+		}
+		if (isset($this->tmpfiles)) {
+			foreach($this->tmpfiles as $f) {
+				if (file_exists($f)) {
+					$args[] = "--file='$f'";
+				}
+			}
+		}
+		exec("/usr/local/bin/email ".implode(" ", $args), $result);
+		echo implode("<br />", $result);
+
+		//Remove any TMP files
+		if (isset($this->tmpfiles)) {
+			foreach($this->tmpfiles as $f) {
+				if (file_exists($f)) {
+					unlink($f);
+				}
+			}
+		}
+	}
+
+	public function send_OBSOLETE_sendEmail()
+	{
 		if ($this->as_html) {
 			$args[] = "-o message-content-type=html";
 			$this->body = preg_replace('"\r\n"', '<br />', $this->body);
@@ -121,11 +165,10 @@ class helper_email {
     			font-size: 11px;
     			font-family:  arial, sans-serif, sans, FreeSans;
 				padding: 2px;
-				border-spacing: 2px;	
+				border-spacing: 2px;
 				color: #333333;
 			}
 		</style>
 		";
 	}
 }
-
