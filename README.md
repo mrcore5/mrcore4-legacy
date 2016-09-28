@@ -19,13 +19,13 @@ both a `sqlsrv` and `mysql` connection array.
 
 This package uses SMTP mail settings from Laravel, so you will need to define those in your .env like so
 
-	### SMTP Required for mrcore4legacy ###
-	MAIL_HOST=smtp.example.com
-	MAIL_PORT=587
-	MAIL_USERNAME=system@example.com
-	MAIL_PASSWORD=password
-	MAIL_FROM_ADDRESS=legacy@exanoke.com
-	MAIL_FROM_NAME=Legacy
+    ### SMTP Required for mrcore4legacy ###
+    MAIL_HOST=smtp.example.com
+    MAIL_PORT=587
+    MAIL_USERNAME=system@example.com
+    MAIL_PASSWORD=password
+    MAIL_FROM_ADDRESS=legacy@exanoke.com
+    MAIL_FROM_NAME=Legacy
 
 ## Contributing
 

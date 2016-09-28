@@ -1,26 +1,26 @@
 {
-	"name": "mreschke/mrcore4-legacy",
-	"type": "library",
-	"description": "Mreschke mRcore4 Legacy Helpers",
-	"keywords": ["mreschke", "mrcore", "legacy"],
-	"homepage": "http://github.com/mrcore5/mrcore4-legacy",
-	"license": "MIT",
-	"support": {
-		"issues": "https://github.com/mrcore5/mrcore4-legacy/issues"
-	},
-	"authors": [
-		{
-			"name": "Matthew Reschke",
-			"email": "mail@mreschke.com",
-			"homepage": "http://mreschke.com"
-		}
-	],
-	"autoload": {
-		"classmap": [
-			"Legacy"
-		],
-		"psr-4": {
-			"Mreschke\\Mrcore4Legacy\\": ""
-		}
-	}
+    "name": "mreschke/mrcore4-legacy",
+    "type": "library",
+    "description": "Mreschke mRcore4 Legacy Helpers",
+    "keywords": ["mreschke", "mrcore", "legacy"],
+    "homepage": "http://github.com/mrcore5/mrcore4-legacy",
+    "license": "MIT",
+    "support": {
+        "issues": "https://github.com/mrcore5/mrcore4-legacy/issues"
+    },
+    "authors": [
+        {
+            "name": "Matthew Reschke",
+            "email": "mail@mreschke.com",
+            "homepage": "http://mreschke.com"
+        }
+    ],
+    "autoload": {
+        "classmap": [
+            "Legacy"
+        ],
+        "psr-4": {
+            "Mreschke\\Mrcore4Legacy\\": ""
+        }
+    }
 }
