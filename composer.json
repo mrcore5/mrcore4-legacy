@@ -1,5 +1,5 @@
 {
-    "name": "mreschke/mrcore4-legacy",
+    "name": "mrcore/mrcore4-legacy",
     "type": "library",
     "description": "Mreschke mRcore4 Legacy Helpers",
     "keywords": ["mreschke", "mrcore", "legacy"],
