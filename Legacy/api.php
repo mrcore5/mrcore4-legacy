@@ -34,7 +34,7 @@ if (! function_exists('API\snippet')) {
     function snippet($name)
     {
         #Usage: eval(API::snippet('iam'));
-        $file = base_path()."/vendor/mreschke/mrcore4-legacy/Legacy/$name.php";
+        $file = base_path()."/vendor/mrcore/mrcore4-legacy/Legacy/$name.php";
         if (!file_exists($file)) {
             $file = base_path()."/../Modules/Mreschke/Mrcore4Legacy/Legacy/$name.php";
         }
