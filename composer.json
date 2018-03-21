@@ -1,7 +1,7 @@
 {
     "name": "mrcore/mrcore4-legacy",
     "type": "library",
-    "description": "Mreschke mRcore4 Legacy Helpers",
+    "description": "mRcore4 Legacy Helpers",
     "keywords": ["mreschke", "mrcore", "legacy"],
     "homepage": "http://github.com/mrcore5/mrcore4-legacy",
     "license": "MIT",
@@ -20,7 +20,7 @@
             "Legacy"
         ],
         "psr-4": {
-            "Mreschke\\Mrcore4Legacy\\": ""
+            "Mrcore\\Mrcore4Legacy\\": ""
         }
     }
 }

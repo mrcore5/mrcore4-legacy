@@ -1,4 +1,4 @@
-<?php namespace Mreschke\Mrcore4Legacy\Providers;
+<?php namespace Mrcore\Mrcore4Legacy\Providers;
 
 use Illuminate\Support\ServiceProvider;
 

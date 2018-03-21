@@ -13,7 +13,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Mreschke\Mrcore4Legacy;
+namespace Mrcore\Mrcore4Legacy;
 
 use \Illuminate\Console\Command;
 use \Symfony\Component\Console\Input\InputOption;

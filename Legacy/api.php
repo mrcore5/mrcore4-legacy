@@ -35,9 +35,6 @@ if (! function_exists('API\snippet')) {
     {
         #Usage: eval(API::snippet('iam'));
         $file = base_path()."/vendor/mrcore/mrcore4-legacy/Legacy/$name.php";
-        if (!file_exists($file)) {
-            $file = base_path()."/../Modules/Mreschke/Mrcore4Legacy/Legacy/$name.php";
-        }
         return "require_once '$file';";
     }
 
