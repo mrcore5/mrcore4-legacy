@@ -1,4 +1,4 @@
-## mRcore Bridge Module for mRcore4 Legacy v5.7
+## mRcore Bridge Module for mRcore4 Legacy v5.8
 
 This mrcore5 applications allow all mrcore4 apps to function by providing a legacy interface.
 
